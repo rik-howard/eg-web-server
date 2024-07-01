@@ -31,4 +31,23 @@ class WSControllerET {
         ;
     }
 
+    @Test void shouldReceiveHostnameResponse () {
+        // given
+        String requestId = "000";
+        // when
+        ResponseSpec actual = webTestClient
+            .get ()
+            .uri ("/hostname")
+            .accept (MediaType.APPLICATION_JSON)
+            .header ("request-id", requestId)
+            .exchange ();
+        // then
+        String expected = resourceContent ("dto/hostname-response.json");
+        actual
+            .expectStatus ().isOk ()
+            .expectHeader ().contentType (MediaType.APPLICATION_JSON_UTF8)
+            .expectBody ().json (expected)
+        ;
+    }
+
 }

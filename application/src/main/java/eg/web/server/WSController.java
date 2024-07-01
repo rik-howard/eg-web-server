@@ -13,12 +13,22 @@ import reactor.core.publisher.Mono;
 public class WSController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger (WSController.class);
+    private final WSService wsService;
+
+    @Autowired public WSController (final WSService wsService) {this.wsService = wsService;}
 
     @GetMapping ("")
     public Mono <List <String>> rootJsonMono () {
-        List <String> endPoints = List.of ("/");
+        List <String> endPoints = wsService.endPoints ();
         LOGGER.atInfo ().log ("get end points: {}", endPoints);
         return Mono.just (endPoints);
+    }
+
+    @GetMapping ("/hostname")
+    public Mono <String> hostnameJsonMono () {
+        String hostname = wsService.hostname ();
+        LOGGER.atInfo ().log ("get hostname: {}", hostname);
+        return Mono.just (Template.hostnameJson (hostname));
     }
 
 }

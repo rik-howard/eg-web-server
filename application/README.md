@@ -34,6 +34,11 @@ psef xterm.+mvn.spring.boot.run --kill
 xt java -jar target/eg-web-server-0.0.0.jar
 ```
 
+### Browse
+```Bash
+http GET localhost:8080/hostname
+```
+
 ### Java Stop Serving
 ```Bash
 psef xterm.+java..jar.target.eg.web.server.0.0.0.jar --kill
