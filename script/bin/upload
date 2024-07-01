@@ -16,6 +16,7 @@ then
         exit 2
     else
         cp -pr "$1" "$2"
+        echo "new file:"
         ls -l "$2/$leaf"
     fi
 else

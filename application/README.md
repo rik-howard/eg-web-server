@@ -1,7 +1,7 @@
 
 
 
-# EG Web Server: Application
+# [EG Web Server](../README.md): Application
 
 
 ## How
@@ -32,7 +32,7 @@ psef xterm.+mvn.spring.boot.run --kill
 
 ### Java Start Serving
 ```Bash
-xt java -jar target/web-server-application-0.1.5.jar --colour=magenta
+xt java -jar target/web-server-application-0.2.0.jar --colour=magenta
 ```
 
 ### Load-Test
@@ -42,7 +42,7 @@ loader-load-test
 
 ### Java Stop Serving
 ```Bash
-psef xterm.+java..jar.target.web.server.application.0.1.5.jar --kill
+psef xterm.+java..jar.target.web.server.application.0.2.0.jar --kill
 ```
 
 ### Check Log
@@ -52,7 +52,7 @@ loader-check-log
 
 ### Upload Jar
 ```Bash
-upload target/web-server-application-0.1.5.jar $WSA_REPO
+upload target/web-server-application-0.2.0.jar $WSA_REPO
 ```
 
 ## What

@@ -1,14 +1,13 @@
 package eg.web.server;
 
+import java.io.IOException;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
-import java.util.List;
-
 import static org.mockito.Mockito.when;
 
 class WSControllerUT {
@@ -34,7 +33,7 @@ class WSControllerUT {
             .verifyComplete ();
     }
 
-    @Test void shouldReturnHostname () {
+    @Test void shouldReturnHostname () throws IOException {
         // given
         String hostname = "whatever";
         String requestId = "000";

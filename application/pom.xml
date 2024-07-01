@@ -6,7 +6,7 @@
 
     <groupId>net.eg.web</groupId>
     <artifactId>web-server-application</artifactId>
-    <version>0.1.5</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 

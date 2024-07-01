@@ -1,7 +1,7 @@
 
 
 
-# EG Web Server: Loader
+# [EG Web Server](../README.md): Loader
 
 
 ## How
@@ -32,7 +32,6 @@ loader-load-test
 
 ### Check Logging
 ```bash
-clear
 loader-check-log
 ```
 
