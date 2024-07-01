@@ -5,11 +5,6 @@
 
 
 ## How
-```bash
-clear
-```
-
-### Tooling
 ```Bash
 source etc/config
 ```
@@ -22,6 +17,11 @@ mvn clean verify
 ### Maven Start Serving
 ```Bash
 xt mvn spring-boot:run
+```
+
+### Browse
+```Bash
+http GET localhost:8080
 ```
 
 ### Maven Stop Serving

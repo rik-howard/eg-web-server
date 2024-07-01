@@ -12,16 +12,8 @@ EG Web Server is a clustered, contained application.
 * JQ 1.6
 
 
-## Tooling
-```bash
-clear
-```
-```bash
-script/check-tooling
-```
-
-
 ## Subprojects
-* [Loader](loader/README.md): a simple load tester for local hosts
+* [Loader](loader/README.md): a load tester for a local host end point
+* [Application](application/README.md): a stateless application supporting some end points
 
 *2024-07-01*

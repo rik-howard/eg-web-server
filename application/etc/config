@@ -15,3 +15,11 @@ $BASE/script/bin:\
 /usr/local/bin:\
 /usr/bin:\
 /bin
+
+clear
+echo "Application Tooling
+
+    java: $(wiv java | head -1)
+    mvn : $(wiv mvn | head -1)
+    http: $(wiv http)
+"

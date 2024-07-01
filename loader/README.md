@@ -2,9 +2,6 @@
 
 
 # EG Web Server: Loader
-```bash
-clear
-```
 
 
 ## How

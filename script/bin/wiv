@@ -1,0 +1,8 @@
+#!/bin/bash
+##
+# $ wiv <program>
+##
+if which "$1" &>/dev/null
+then $1 --version
+else echo "not found"
+fi

@@ -11,3 +11,10 @@ $BASE/script/bin:\
 /usr/local/bin:\
 /usr/bin:\
 /bin
+
+clear
+echo "Loader Tooling
+
+    http: $(wiv http)
+    jq  : $(wiv jq)
+"
