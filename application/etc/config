@@ -6,7 +6,6 @@
 export JAVA_HOME=$HOME/studio/program/jdk-17.0.2
 export MAVEN_HOME=$HOME/studio/program/apache-maven-3.8.5
 export BASE=$(dirname "$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[*]}")")")")
-export WSA_REPO=${BASE/project/product}
 
 export PATH=.:\
 $JAVA_HOME/bin:\
@@ -24,7 +23,5 @@ echo "Application Tooling
     mvn     : $(wiv mvn | head -1)
     http    : $(wiv http)
     jq      : $(wiv jq)
-
-    WSA_REPO: $WSA_REPO
 
 "

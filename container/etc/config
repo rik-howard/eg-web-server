@@ -5,7 +5,6 @@
 
 export DOCKER_HOST=unix:///home/rik/.docker/desktop/docker.sock
 export BASE=$(dirname "$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[*]}")")")")
-export WSA_REPO=${BASE/project/product}
 
 export PATH=.:\
 $BASE/loader/bin:\
@@ -22,7 +21,5 @@ echo "Container Tooling
     docker  : $(wiv docker)
     http    : $(wiv http)
     jq      : $(wiv jq)
-
-    WSA_REPO: $WSA_REPO
 
 "

@@ -40,7 +40,7 @@ xt java -jar target/web-server-application-0.2.0.jar --colour=magenta
 loader-load-test 8080 hostname
 ```
 
-### Check Log
+### Check Logging
 ```Bash
 loader-check-log
 ```
@@ -48,11 +48,6 @@ loader-check-log
 ### Java Stop Serving
 ```Bash
 psef xterm.+java..jar.target.web.server.application.0.2.0.jar --kill
-```
-
-### Upload Jar
-```Bash
-upload target/web-server-application-0.2.0.jar $WSA_REPO
 ```
 
 ## What

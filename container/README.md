@@ -9,25 +9,20 @@
 source etc/config
 ```
 
-### Download Jar
+### Copy Jar
 ```bash
-download $WSA_REPO/web-server-application-0.2.0.jar src/tmp
+cp -pr ../application/target/web-server-application-*.jar src/tmp
 ```
 
 ### Build Image
 ```bash
-docker-build-image 0.2.1
+APPLICATION_VERSION=$(basename $(ls src/tmp/web-server-application-*.jar) | cut -d- -f4 | cut -d. -f1-3)
+docker build src --tag=rik911/web-server-container:0.2.1 --build-arg=VERSION=$APPLICATION_VERSION
 ```
 
 ### Run Container (Start Serving)
 ```bash
-xt docker-run-container wsc 80 8080 0.2.1
-```
-
-### Browse End-Points
-```bash
-http GET localhost
-http GET localhost/hostname Request-Id:714
+xt docker run --tty --name=wsc --publish=80:8080 rik911/web-server-container:0.2.1
 ```
 
 ### Load-Test End-Point
@@ -35,26 +30,28 @@ http GET localhost/hostname Request-Id:714
 loader-load-test 80 hostname
 ```
 
-### Check Log
+### Check Logging
 ```Bash
 loader-check-log
 ```
 
 ### Stop Server
 ```bash
-psef xterm.+docker.run.container --kill
+psef xterm.+web.server.container --kill
 ```
 
 ### Pushing
 ```Bash
-docker login --user=rik911
-docker push rik911/web-server-container:0.2.1
+#docker login --user=rik911
+#docker push rik911/web-server-container:0.2.1
 ```
 
 ### Removing
 ```bash
 docker container remove wsc --force
-docker image remove rik911/web-server-container:0.2.1
+```
+```bash
+# docker image remove rik911/web-server-container:0.2.1  # just fyi
 ```
 
 

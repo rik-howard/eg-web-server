@@ -14,20 +14,14 @@ source etc/config
 xt mock-server-start
 ```
 
-### Browse
+### Browse End-Point
 ```bash
 http GET localhost:8080
 ```
 
-### Get Local Hostname
+### Load-Test End-Point
 ```bash
-loader-get-local
-```
-
-### Load-Test Hostname
-```bash
-clear
-loader-load-test
+loader-load-test 8080
 ```
 
 ### Check Logging
@@ -51,7 +45,7 @@ graph TD
 
 ### Scripts
 [mock-server-start](bin/mock-server-start)
-* spawns shell
+* blocks process
 * listens on port 8080
 * responds with HostnameResponse
 
