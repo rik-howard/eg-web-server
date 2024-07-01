@@ -1,0 +1,16 @@
+#!/bin/bash
+##
+# $ script/check-tooling
+##
+
+which_version () { program=$1
+    if which $program &>/dev/null
+    then $program --version
+    else echo "not found: $program"
+    fi
+}
+
+echo "
+    http: $(which_version http)
+    jq  : $(which_version jq)
+"

@@ -1,0 +1,5 @@
+#!/bin/bash
+##
+# $ mock-server-stop
+##
+psef xterm.+mock.server.start --kill

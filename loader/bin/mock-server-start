@@ -1,0 +1,17 @@
+#!/bin/bash
+##
+# $ mock-server-start
+##
+
+respond () {
+    echo -ne "HTTP/1.0 200 OK\nContent-Length: $1\n\n"
+    echo $2
+}
+
+export body='{"colour":"yellow","hostname":"mercury","requestId":"73"}'
+export length=${#body}
+export -f respond
+
+while true
+do respond $length "$body" | nc -l -p 8080
+done

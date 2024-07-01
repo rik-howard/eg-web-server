@@ -1,0 +1,26 @@
+#!/bin/bash
+##
+# $ how [<unit>]
+##
+
+script () { candidate=$1
+    if test -z "$candidate"
+    then echo $0
+    elif test -f "$candidate"
+    then echo $candidate
+    else whereis -B ${PATH//:/ } -f -b $candidate | cut -d' ' -f2
+    fi
+}
+
+gin () { echo -n 2; }
+end () { grep -n '##' $1 | cut -d: -f1 | head -2 | tail -1; }
+
+export -f script
+export -f gin
+export -f end
+
+script=$(script $1)
+end=$(end $script)
+gin=$(gin)
+
+sed -n -e "${gin},${end}p" -e "${end}q" $script

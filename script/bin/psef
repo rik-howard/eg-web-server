@@ -1,0 +1,33 @@
+#!/bin/bash
+##
+# $ psef <regex> [--pid|--cmd|--kill]
+##
+REGEX=$1
+FLAG=$2
+
+ps_egrep () {
+    ps -ef\
+    | egrep -v "grep..E.$REGEX"\
+    | egrep -v ".bin.psef.$REGEX"\
+    | egrep "$REGEX"
+}
+
+case "$FLAG" in
+    --cmd)
+        ps_egrep\
+        | tr -s ' '\
+        | cut -d' ' -f8-
+    ;;
+    --pid)
+        ps_egrep\
+        | tr -s ' '\
+        | cut -d' ' -f2
+    ;;
+    --kill)
+        psef "$REGEX" --pid\
+        | map kill
+    ;;
+    *)
+        ps_egrep
+    ;;
+esac

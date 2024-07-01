@@ -1,0 +1,39 @@
+#!/bin/bash
+##
+# $ xt <command ...>
+##
+W=208
+H=25
+
+case "$1" in
+    +)
+        xterm -geometry ${W}x${H} -e "
+              while true
+              do
+                  clear
+                  ${*:2}
+                  read
+              done
+          " &
+          sleep 1
+    ;;
+    -)
+        cmd=${2/ *}
+        if test "$(psef xterm.+$cmd --cmd | egrep -o $cmd)" != "$cmd"
+        then
+            xterm -geometry $Wx$H -e "
+                while true
+                do
+                    clear
+                    ${*:2}
+                    read
+                done
+            " &
+            sleep 1
+        fi
+    ;;
+    *)
+        xterm -geometry ${W}x${H} -e "$* || read -t7 -p?" &
+        sleep 1
+    ;;
+esac

@@ -1,0 +1,8 @@
+#!/bin/bash
+##
+# $ source etc/config
+##
+
+BASE=$(dirname "$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[*]}")")")")
+
+PATH=.:$BASE/loader/bin:$BASE/script/bin:/usr/local/bin:/usr/bin:/bin
