@@ -54,7 +54,7 @@ docker push rik911/web-server-container:0.2.1
 ### Removing
 ```bash
 docker container remove wsc --force
-docker image remove rik911/web-server-application:0.2.1
+docker image remove rik911/web-server-container:0.2.1
 ```
 
 
