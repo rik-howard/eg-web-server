@@ -1,7 +1,7 @@
 
 
 
-# EG Web Server
+# EG Web Server: Application
 
 
 ## How
@@ -31,17 +31,17 @@ psef xterm.+mvn.spring.boot.run --kill
 
 ### Java Start Serving
 ```Bash
-xt java -jar target/eg-web-server-0.0.0.jar
+xt java -jar target/eg-web-server-0.1.4.jar
 ```
 
 ### Browse
 ```Bash
-http GET localhost:8080/hostname
+http GET localhost:8080/hostname Request-Id:4711
 ```
 
 ### Java Stop Serving
 ```Bash
-psef xterm.+java..jar.target.eg.web.server.0.0.0.jar --kill
+psef xterm.+java..jar.target.eg.web.server.0.1.4.jar --kill
 ```
 
 

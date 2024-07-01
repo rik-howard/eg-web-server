@@ -36,11 +36,12 @@ class WSControllerUT {
     @Test void shouldReturnHostname () throws IOException {
         // given
         String hostname = "whatever";
+        String requestId = "000";
         // when
         when (mockWSService.hostname ()).thenReturn (hostname);
-        Mono <String> actual = subject.hostnameJsonMono ();
+        Mono <String> actual = subject.hostnameJsonMono (requestId);
         // then
-        String expected = Template.hostnameJson (hostname);
+        String expected = Template.hostnameJson (hostname, requestId);
         StepVerifier
             .create (actual)
             .expectNext (expected)

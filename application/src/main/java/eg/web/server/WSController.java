@@ -25,10 +25,10 @@ public class WSController {
     }
 
     @GetMapping ("/hostname")
-    public Mono <String> hostnameJsonMono () {
+    public Mono <String> hostnameJsonMono (final @RequestHeader ("Request-Id") String requestId) {
         String hostname = wsService.hostname ();
-        LOGGER.atInfo ().log ("get hostname: {}", hostname);
-        return Mono.just (Template.hostnameJson (hostname));
+        LOGGER.atInfo ().log ("get requestId: {}; hostname: {}", requestId, hostname);
+        return Mono.just (Template.hostnameJson (hostname, requestId));
     }
 
 }
