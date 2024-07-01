@@ -6,8 +6,10 @@ EG Web Server is a clustered, contained application.
 
 
 ## Prerequisites
-* http 3.2
-* jq 1.6
+* Java 17
+* Maven 3.8
+* HTTP 3.2
+* JQ 1.6
 
 
 ## Tooling
