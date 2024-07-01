@@ -1,0 +1,14 @@
+#!/bin/bash
+##
+# $ loader-get-local [<port>] [<end point>] [<request id>]
+##
+mkdir -p tmp
+PORT=${1:-8080}
+PINT=$2
+REQUEST_ID=${3:-317}
+RESPONSE=$(http GET "localhost:$PORT/$PINT" "Request-Id:$REQUEST_ID" --print=hb)
+RESPONSE_BODY="$(echo "$RESPONSE" | egrep -A4 '{')"
+HTTP_CODE=$(echo "$RESPONSE" | egrep HTTP | cut -d' ' -f2)
+HOSTNAME=$(echo "$RESPONSE_BODY" | jq -r .hostname)
+COLOUR=$(echo "$RESPONSE_BODY" | jq -r .colour)
+echo "$REQUEST_ID $HTTP_CODE $HOSTNAME $COLOUR" | tee --append "tmp/log"

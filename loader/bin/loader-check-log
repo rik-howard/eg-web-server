@@ -1,0 +1,29 @@
+#!/bin/bash
+##
+# $ loader/bin/loader-check-log
+##
+LOG="tmp/log"
+HOSTS=$(cut -d' ' -f3 < "$LOG" | sort -u | xargs)
+CODES=$(cut -d' ' -f2 < "$LOG" | sort -u | xargs)
+COLOURS=$(cut -d' ' -f4 < "$LOG" | sort -u | xargs)
+
+echo
+echo "Hosts  : $HOSTS"
+echo "Codes  : $CODES"
+echo "Colours: $COLOURS"
+echo
+
+for HOST in $HOSTS
+do echo "$HOST: $(egrep -c "$HOST" "$LOG")"
+done
+echo
+
+for CODE in $CODES
+do echo "$CODE: $(egrep -c "$CODE" "$LOG")"
+done
+echo
+
+for COLOUR in $COLOURS
+do echo "$COLOUR: $(egrep -c "$COLOUR" "$LOG")"
+done
+echo

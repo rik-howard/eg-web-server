@@ -1,0 +1,26 @@
+#!/bin/bash
+##
+# $ loader/bin/loader-load-test [<port>] [<end point>] [<count>]
+##
+
+PORT=${1:-8080}
+PINT=${2:-hostname}
+COUNT=${3:-8}
+WIDTH=$((${#COUNT} - 1))
+
+echo "Loading:
+
+    PORT : $PORT
+    PATH : $PINT
+    COUNT: $COUNT
+"
+
+mkdir -p tmp
+echo -n > tmp/log
+
+for REQUEST_ID in $(seq -f "%0${WIDTH}g" 0 "$((COUNT - 1))")
+do
+    loader-get-local "$PORT" "$PINT" "$REQUEST_ID" &
+    sleep 0.000001
+done
+sleep 1
