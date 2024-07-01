@@ -1,0 +1,9 @@
+#!/bin/bash
+##
+# $ docker-run-container <name> <engine port> <container port> <version>
+##
+test -n "$1" || exit 1
+test -n "$2" || exit 2
+test -n "$3" || exit 3
+test -n "$4" || exit 4
+docker run --tty --name=$1 --publish=$2:$3 rik911/web-server-container:$4

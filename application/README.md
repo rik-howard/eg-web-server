@@ -19,7 +19,7 @@ mvn clean verify
 xt mvn spring-boot:run
 ```
 
-### Browse
+### Browse End-Point
 ```Bash
 http GET localhost:8080
 http GET localhost:8080/hostname Request-Id:4711
@@ -35,19 +35,19 @@ psef xterm.+mvn.spring.boot.run --kill
 xt java -jar target/web-server-application-0.2.0.jar --colour=magenta
 ```
 
-### Load-Test
+### Load-Test End-Point
 ```Bash
-loader-load-test
-```
-
-### Java Stop Serving
-```Bash
-psef xterm.+java..jar.target.web.server.application.0.2.0.jar --kill
+loader-load-test 8080 hostname
 ```
 
 ### Check Log
 ```Bash
 loader-check-log
+```
+
+### Java Stop Serving
+```Bash
+psef xterm.+java..jar.target.web.server.application.0.2.0.jar --kill
 ```
 
 ### Upload Jar

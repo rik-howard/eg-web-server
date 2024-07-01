@@ -1,8 +1,7 @@
 #!/bin/bash
 ##
-# $ upload <fin> <fon>
+# $ script/bin/download <fin> <fon>
 ##
-
 if test -f "$1"
 then
     if ! test -e "$2"

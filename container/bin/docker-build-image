@@ -1,0 +1,6 @@
+#!/bin/bash
+##
+# $ docker-build-image <version>
+##
+test -n "$1" || exit 1
+docker build src --tag=rik911/web-server-container:$1
