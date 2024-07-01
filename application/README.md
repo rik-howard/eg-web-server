@@ -22,6 +22,7 @@ xt mvn spring-boot:run
 ### Browse
 ```Bash
 http GET localhost:8080
+http GET localhost:8080/hostname Request-Id:4711
 ```
 
 ### Maven Stop Serving
@@ -31,19 +32,28 @@ psef xterm.+mvn.spring.boot.run --kill
 
 ### Java Start Serving
 ```Bash
-xt java -jar target/eg-web-server-0.1.4.jar
+xt java -jar target/web-server-application-0.1.5.jar --colour=magenta
 ```
 
-### Browse
+### Load-Test
 ```Bash
-http GET localhost:8080/hostname Request-Id:4711
+loader-load-test
 ```
 
 ### Java Stop Serving
 ```Bash
-psef xterm.+java..jar.target.eg.web.server.0.1.4.jar --kill
+psef xterm.+java..jar.target.web.server.application.0.1.5.jar --kill
 ```
 
+### Check Log
+```Bash
+loader-check-log
+```
+
+### Upload Jar
+```Bash
+upload target/web-server-application-0.1.5.jar $WSA_REPO
+```
 
 ## What
 ```mermaid

@@ -6,6 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class WSApplicationIT {
 
-    @Test void shouldLoadApplication () {}
+    @Test void shouldLoadApplication() {}
 
 }

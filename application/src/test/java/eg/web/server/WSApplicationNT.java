@@ -1,9 +1,11 @@
 package eg.web.server;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.nio.charset.Charset;
-import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WSApplicationNT {

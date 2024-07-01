@@ -1,5 +1,6 @@
 
 {
     "hostname":  "saturn",
-    "requestId": "000"
+    "requestId": "000",
+    "colour": "red"
 }

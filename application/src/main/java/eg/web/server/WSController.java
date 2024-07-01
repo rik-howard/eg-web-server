@@ -14,8 +14,12 @@ public class WSController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger (WSController.class);
     private final WSService wsService;
+    private final String colour;
 
-    @Autowired public WSController (final WSService wsService) {this.wsService = wsService;}
+    @Autowired public WSController (final WSService wsService, final String colour) {
+        this.wsService = wsService;
+        this.colour = colour;
+    }
 
     @GetMapping ("")
     public Mono <List <String>> rootJsonMono () {
@@ -27,8 +31,8 @@ public class WSController {
     @GetMapping ("/hostname")
     public Mono <String> hostnameJsonMono (final @RequestHeader ("Request-Id") String requestId) {
         String hostname = wsService.hostname ();
-        LOGGER.atInfo ().log ("get requestId: {}; hostname: {}", requestId, hostname);
-        return Mono.just (Template.hostnameJson (hostname, requestId));
+        LOGGER.atInfo ().log ("get requestId: {}; hostname: {}; colour: {}", requestId, hostname, colour);
+        return Mono.just (Template.hostnameJson (hostname, requestId, colour));
     }
 
 }

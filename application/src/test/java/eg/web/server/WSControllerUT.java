@@ -1,13 +1,14 @@
 package eg.web.server;
 
-import java.io.IOException;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 
 class WSControllerUT {
@@ -17,7 +18,7 @@ class WSControllerUT {
 
     @BeforeEach void setUp () {
         MockitoAnnotations.openMocks (this);
-        subject = new WSController (mockWSService);
+        subject = new WSController (mockWSService, "green");
     }
 
     @Test void shouldReturnEPs () {
@@ -33,15 +34,16 @@ class WSControllerUT {
             .verifyComplete ();
     }
 
-    @Test void shouldReturnHostname () throws IOException {
+    @Test void shouldReturnHostname () {
         // given
         String hostname = "whatever";
         String requestId = "000";
+        String colour = "green";
         // when
         when (mockWSService.hostname ()).thenReturn (hostname);
         Mono <String> actual = subject.hostnameJsonMono (requestId);
         // then
-        String expected = Template.hostnameJson (hostname, requestId);
+        String expected = Template.hostnameJson (hostname, requestId, colour);
         StepVerifier
             .create (actual)
             .expectNext (expected)
