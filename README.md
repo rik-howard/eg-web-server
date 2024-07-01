@@ -18,4 +18,8 @@ clear
 script/check-tooling
 ```
 
+
+## Subprojects
+* [Loader](loader/README.md): a simple load tester for local hosts
+
 *2024-07-01*
