@@ -4,11 +4,16 @@ kind: Pod
 metadata:
   name: wsp
   labels:
-    name: wsp
+    selectable: wsp
 
 spec:
   containers:
     - name: wsc
       image: rik911/web-server-container:0.2.1
+      args:
+        - --colour=green
+      env:
+        - name: SERVER_PORT
+          value: "{{.Values.serverPort}}"
       ports:
-        - containerPort: 8080
+        - containerPort: {{.Values.serverPort}}
