@@ -3,7 +3,7 @@
 # $ source etc/config
 ##
 
-export DOCKER_HOST=unix:///home/rik/.docker/desktop/docker.sock
+export DOCKER_HOST=unix://$HOME/.docker/desktop/docker.sock
 export BASE=$(dirname "$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[*]}")")")")
 
 export PATH=.:\
@@ -15,11 +15,15 @@ $BASE/container/bin:\
 /bin
 
 clear
+echo "Container Tooling:
+
+    docker: $(wiv docker)
+    http  : $(wiv http)
+    jq    : $(wiv jq)
+"
 systemctl start docker-desktop.service --user
-echo "Container Tooling
+# sleep 3
+echo "Container Engine:
 
-    docker  : $(wiv docker)
-    http    : $(wiv http)
-    jq      : $(wiv jq)
-
+    Docker: $(systemctl is-active docker-desktop.service --user)
 "

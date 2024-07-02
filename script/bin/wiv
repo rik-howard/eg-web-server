@@ -3,6 +3,12 @@
 # $ wiv <program>
 ##
 if which "$1" &>/dev/null
-then $1 --version
+then
+    case "$1" in
+    helm    ) $1 version;;
+    kubectl ) $1 version --short 2>/dev/null | xargs;;
+    minikube) $1 version;;
+    *       ) $1 --version;;
+    esac
 else echo "not found"
 fi

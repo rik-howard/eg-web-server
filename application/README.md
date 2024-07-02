@@ -19,7 +19,7 @@ mvn clean verify
 xt mvn spring-boot:run
 ```
 
-### Browse End-Point
+### Browse End-Points
 ```Bash
 http GET localhost:8080
 http GET localhost:8080/hostname Request-Id:4711
@@ -27,7 +27,7 @@ http GET localhost:8080/hostname Request-Id:4711
 
 ### Maven Stop Serving
 ```Bash
-psef xterm.+mvn.spring.boot.run --kill
+psef mvn.spring.boot.run --kill
 ```
 
 ### Java Start Serving
@@ -47,7 +47,7 @@ loader-check-log
 
 ### Java Stop Serving
 ```Bash
-psef xterm.+java..jar.target.web.server.application.0.2.0.jar --kill
+psef java..jar.target.web.server.application.0.2.0.jar --kill
 ```
 
 ## What

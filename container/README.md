@@ -11,13 +11,12 @@ source etc/config
 
 ### Copy Jar
 ```bash
-cp -pr ../application/target/web-server-application-*.jar src/tmp
+cp -pr ../application/target/web-server-application-0.2.0.jar src/tmp
 ```
 
 ### Build Image
 ```bash
-APPLICATION_VERSION=$(basename $(ls src/tmp/web-server-application-*.jar) | cut -d- -f4 | cut -d. -f1-3)
-docker build src --tag=rik911/web-server-container:0.2.1 --build-arg=VERSION=$APPLICATION_VERSION
+docker build src --tag=rik911/web-server-container:0.2.1 --build-arg=VERSION=0.2.0
 ```
 
 ### Run Container (Start Serving)
@@ -37,13 +36,13 @@ loader-check-log
 
 ### Stop Server
 ```bash
-psef xterm.+web.server.container --kill
+psef web.server.container.0.2.1 --kill
 ```
 
 ### Pushing
 ```Bash
 #docker login --user=rik911
-#docker push rik911/web-server-container:0.2.1
+docker push rik911/web-server-container:0.2.1
 ```
 
 ### Removing
@@ -51,7 +50,7 @@ psef xterm.+web.server.container --kill
 docker container remove wsc --force
 ```
 ```bash
-# docker image remove rik911/web-server-container:0.2.1  # just fyi
+docker image remove rik911/web-server-container:0.2.1
 ```
 
 

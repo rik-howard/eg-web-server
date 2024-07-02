@@ -1,0 +1,70 @@
+#!/bin/bash
+##
+# $ module
+##
+
+docker_status () { systemctl is-active docker-desktop.service --user; }
+minikube_status () { minikube status | tail -n +2 | yq .host; }
+tunnel_status () { if psef xterm.+minikube.tunnel &>/dev/null; then echo Open; else echo Closed; fi; }
+monitor_status () { if psef xterm.+show.kubernetes &>/dev/null; then echo On; else echo Off; fi; }
+
+minikube_is_not_running () { test "$(minikube_status)" != "Running"; }
+tunnel_is_not_open () { test "$(tunnel_status)" != "Open"; }
+monitor_is_not_on () { test "$(monitor_status)" != "On"; }
+
+show_kubernetes () {
+    #service=$(kubectl get services --output=yaml 2>/dev/null | yq '.items[] | select (.status.loadBalancer.ingress[].ip == "127.0.0.1")')
+    #colour=$(echo "$service" | yq .spec.selector.colour | egrep -v null)
+    #mixture=$(echo "$service" | yq .spec.selector.mixture | egrep -v null)
+    #is_empty "$colour$mixture" && CLR=white || CLR=l$colour$mixture
+    #export CLR
+    #debug $CLR
+    echo; echo SERVICES;     kubectl get services    --output=wide #| hit "$colour$mixture"
+    echo; echo DEPLOYMENTS;  kubectl get deployments --show-labels #| hit "$colour$mixture"
+    echo; echo REPLICA SETS; kubectl get replicasets --show-labels #| hit "$colour$mixture"
+    echo; echo PODS;         kubectl get pods        --show-labels #| hit "$colour$mixture"
+    #unset CLR
+}; export -f show_kubernetes
+
+docker_start () {
+    systemctl start docker-desktop.service --user
+}
+
+minikube_start () {
+    if minikube_is_not_running
+    then minikube start --extra-config=apiserver.service-node-port-range=1-65535
+    fi
+}
+
+tunnel_start () {
+    if tunnel_is_not_open
+    then xt minikube tunnel
+    fi
+}
+
+monitor_start () {
+    if monitor_is_not_on
+    then xt + show_kubernetes
+    fi
+}
+
+docker_stop () {
+    systemctl stop docker-desktop.service --user
+}
+
+minikube_stop () {
+    #if minikube_is_not_running
+    #then
+    minikube stop
+    #fi
+}
+
+tunnel_stop () {
+    psef xterm.+minikube.tunnel --kill
+}
+
+monitor_stop () {
+    psef xterm.+show.kubernetes --kill
+}
+
+export -f docker_stop minikube_stop tunnel_stop monitor_stop

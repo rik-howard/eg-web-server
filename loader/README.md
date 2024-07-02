@@ -19,6 +19,11 @@ xt mock-server-start
 http GET localhost:8080
 ```
 
+### Get Local Root
+```bash
+loader-get-local 8080
+```
+
 ### Load-Test End-Point
 ```bash
 loader-load-test 8080
