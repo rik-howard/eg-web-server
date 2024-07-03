@@ -8,6 +8,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: {{.Values.serverPort}}
+      targetPort: {{.Values.serverPort}}
       nodePort: {{.Values.serverPort}}
   selector:
-    selectable: wsp
+    {{.Values.selectorKey}}: {{.Values.selectorGem}}

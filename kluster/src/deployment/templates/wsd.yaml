@@ -2,24 +2,25 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: wsd
+  name: {{.Values.serverColour}}
 
 spec:
   replicas: 3
   selector:
     matchLabels:
-      selectable: wsp
+      colour: {{.Values.serverColour}}
   template:
     metadata:
       name: wsp
       labels:
-        selectable: wsp
+        colour: {{.Values.serverColour}}
+        mixture: {{.Values.serverMixture}}
     spec:
       containers:
         - name: wsc
-          image: rik911/eg-web-server:0.5
+          image: rik911/web-server-container:0.2.1
           args:
-            - --colour=green
+            - --colour={{.Values.serverColour}}
           env:
             - name: SERVER_PORT
               value: "{{.Values.serverPort}}"
