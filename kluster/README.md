@@ -15,23 +15,16 @@ source etc/config
 ```bash
 helm install wsk src --set=serverPort=9090
 ```
-```bash
-xt 'minikube service wss --url | tee wss-url'
-```
 
 ### Load Test
 ```bash
-export CLUSTER_PORT=$(cat wss-url | cut -d: -f3)
-loader-load-test $CLUSTER_PORT hostname
+loader-load-test 9090 hostname
 ```
 ```bash
 loader-check-log
 ```
 
 ### Tear-Down
-```bash
-psef minikube.service.wss --kill
-```
 ```bash
 helm uninstall wsk
 ```

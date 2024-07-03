@@ -5,10 +5,9 @@ metadata:
   name: wss
 
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: {{.Values.serverPort}}
-      targetPort: {{.Values.serverPort}}
       nodePort: {{.Values.serverPort}}
   selector:
     selectable: wsp
