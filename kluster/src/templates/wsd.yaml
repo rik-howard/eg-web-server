@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: wsd
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      selectable: wsp
+  template:
+    metadata:
+      name: wsp
+      labels:
+        selectable: wsp
+    spec:
+      containers:
+        - name: wsc
+          image: rik911/eg-web-server:0.5
+          args:
+            - --colour=green
+          env:
+            - name: SERVER_PORT
+              value: "{{.Values.serverPort}}"
+          ports:
+            - containerPort: {{.Values.serverPort}}
