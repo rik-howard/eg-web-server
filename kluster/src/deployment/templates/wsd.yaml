@@ -23,6 +23,6 @@ spec:
             - --colour={{.Values.serverColour}}
           env:
             - name: SERVER_PORT
-              value: "{{.Values.serverPort}}"
+              value: "{{.Values.port.back}}"
           ports:
-            - containerPort: {{.Values.serverPort}}
+            - containerPort: {{.Values.port.back}}

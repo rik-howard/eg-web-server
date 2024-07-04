@@ -1,6 +1,6 @@
 #!/bin/bash
 ##
-# $ psef <regex> [--pid|--cmd|--kill]
+# $ psef [<regex> [--pid|--cmd|--kill]]
 ##
 REGEX=$1
 FLAG=$2

@@ -3,6 +3,8 @@
 # $ source kluster/etc/config
 ##
 
+clear
+
 export DOCKER_HOST=unix:///home/rik/.docker/desktop/docker.sock
 export BASE=$(dirname "$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[*]}")")")")
 
@@ -13,24 +15,17 @@ $BASE/script/bin:\
 /usr/bin:\
 /bin
 
-echo "Kluster Tooling:
+clear
+echo
+echo "Kluster Tooling:"
+echo
+echo "    docker  : $(wiv docker)"
+echo "    minikube: $(wiv minikube | head -1)"
+echo "    kubectl : $(wiv kubectl)"
+echo "    helm    : $(wiv helm | egrep -o Version..v[^,]+)"
+echo "    http    : $(wiv http)"
+echo "    jq      : $(wiv jq)"
+echo "    yq      : $(wiv yq)"
+echo
 
-    docker  : $(wiv docker)
-    minikube: $(wiv minikube | head -1)
-    kubectl : $(wiv kubectl)
-    helm    : $(wiv helm | egrep -o Version..v[^,]+)
-    http    : $(wiv http)
-    jq      : $(wiv jq)
-    yq      : $(wiv yq)
-"
-docker_start
-minikube_start
-tunnel_start
-monitor_start
-echo "Kluster Engine:
-
-    Docker  : $(docker_status)
-    Minikube: $(minikube_status)
-    Tunnel  : $(tunnel_status)
-    Monitor : $(monitor_status)
-"
+source $BASE/script/etc/engine

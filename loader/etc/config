@@ -3,6 +3,8 @@
 # $ source etc/config
 ##
 
+clear
+
 export BASE=$(dirname "$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[*]}")")")")
 
 export PATH=.:\
@@ -13,8 +15,9 @@ $BASE/script/bin:\
 /bin
 
 clear
-echo "Loader Tooling
-
-    http: $(wiv http)
-    jq  : $(wiv jq)
-"
+echo
+echo "Loader Tooling:"
+echo
+echo "    http: $(wiv http)"
+echo "    jq  : $(wiv jq)"
+echo

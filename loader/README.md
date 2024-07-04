@@ -5,36 +5,30 @@
 
 
 ## How
+
+### Set Up
 ```bash
 source etc/config
 ```
-
-### Start Serving
 ```bash
 xt mock-server-start
 ```
 
-### Browse End-Point
+### Verify
 ```bash
-http GET localhost:8080
+http GET localhost:9999
 ```
-
-### Get Local Root
 ```bash
-loader-get-local 8080
+loader-get-local 9999
 ```
-
-### Load-Test End-Point
 ```bash
-loader-load-test 8080
+loader-load-test 9999
 ```
-
-### Check Logging
 ```bash
 loader-check-log
 ```
 
-### Stop Serving
+### Tear Down
 ```bash
 mock-server-stop
 ```
@@ -51,7 +45,7 @@ graph TD
 ### Scripts
 [mock-server-start](bin/mock-server-start)
 * blocks process
-* listens on port 8080
+* listens on port 9999
 * responds with HostnameResponse
 
 [mock-server-stop](bin/mock-server-stop)

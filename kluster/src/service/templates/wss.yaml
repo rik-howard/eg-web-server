@@ -7,8 +7,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: {{.Values.serverPort}}
-      targetPort: {{.Values.serverPort}}
-      nodePort: {{.Values.serverPort}}
+    - nodePort: {{.Values.port.front}}
+      port: {{.Values.port.back}}
+      targetPort: {{.Values.port.back}}
   selector:
     {{.Values.selectorKey}}: {{.Values.selectorGem}}

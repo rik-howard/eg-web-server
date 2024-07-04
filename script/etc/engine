@@ -1,0 +1,74 @@
+#!/bin/bash
+##
+# $ source engine
+##
+
+docker_status () { systemctl is-active docker-desktop.service --user; }
+minikube_status () { minikube status 2>/dev/null | tail -n +2 | yq .host; }
+tunnel_status () { if psef xterm.+minikube.tunnel &>/dev/null; then echo open; else echo closed; fi; }
+
+docker_is_not_active () { test "$(docker_status)" != "active"; }
+minikube_is_not_running () { test "$(minikube_status)" != "Running"; }
+tunnel_is_not_open () { test "$(tunnel_status)" != "open"; }
+
+start_docker () {
+    if docker_is_not_active
+    then systemctl start docker-desktop.service --user
+    fi
+}
+
+start_minikube () {
+    if minikube_is_not_running
+    then minikube start --extra-config=apiserver.service-node-port-range=1-65535
+    fi
+}
+
+start_tunnel () {
+    if tunnel_is_not_open
+    then xt minikube tunnel
+    fi
+}
+
+stop_docker () {
+    systemctl stop docker-desktop.service --user
+}
+
+stop_minikube () {
+    minikube stop
+}
+
+stop_tunnel () {
+    psef xterm.+minikube.tunnel --kill
+}
+
+export -f docker_status start_docker stop_docker #docker_is_not_active
+export -f minikube_status start_minikube stop_minikube #minikube_is_not_active
+export -f tunnel_status start_tunnel stop_tunnel #monitor_is_not_active
+
+show_docker () {
+    echo
+    echo "Docker:"
+    echo
+    echo "    Status: $(docker_status)"
+    echo
+    echo "    Containers:"; echo; docker container list --all 2>/dev/null; echo
+    echo "    Networks:";   echo; docker network   list       2>/dev/null; echo
+    echo "    Volumes:";    echo; docker volume    list       2>/dev/null; echo
+    echo "    Images:";     echo; docker image     list       2>/dev/null; echo
+}
+
+show_kubernetes () {
+    echo
+    echo "Kubernetes:"
+    echo
+    echo "    Docker  : $(docker_status)"
+    echo "    Minikube: $(minikube_status)"
+    echo "    Tunnel  : $(tunnel_status)"
+    echo
+    echo "    Services:";     echo; kubectl get services    --output=wide 2>/dev/null; echo
+    echo "    Deployments:";  echo; kubectl get deployments --show-labels 2>/dev/null; echo
+    echo "    Replica Sets:"; echo; kubectl get replicasets --show-labels 2>/dev/null; echo
+    echo "    Pods:";         echo; kubectl get pods        --show-labels 2>/dev/null; echo
+}
+
+export -f show_docker show_kubernetes

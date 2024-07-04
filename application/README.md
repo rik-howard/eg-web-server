@@ -5,47 +5,34 @@
 
 
 ## How
+
+### Set Up
 ```Bash
 source etc/config
 ```
-
-### Compile and Test
 ```Bash
 mvn clean verify
 ```
-
-### Maven Start Serving
-```Bash
-xt mvn spring-boot:run
-```
-
-### Browse End-Points
-```Bash
-http GET localhost:8080
-http GET localhost:8080/hostname Request-Id:4711
-```
-
-### Maven Stop Serving
-```Bash
-psef mvn.spring.boot.run --kill
-```
-
-### Java Start Serving
 ```Bash
 xt java -jar target/web-server-application-0.2.0.jar --colour=magenta
 ```
 
-### Load-Test End-Point
+### Verify
+```Bash
+http GET localhost:8080
+http GET localhost:8080/hostname Request-Id:4711
+```
+```Bash
+loader-get-local 8080 hostname 3435
+```
 ```Bash
 loader-load-test 8080 hostname
 ```
-
-### Check Logging
 ```Bash
 loader-check-log
 ```
 
-### Java Stop Serving
+### Tear Down
 ```Bash
 psef java..jar.target.web.server.application.0.2.0.jar --kill
 ```

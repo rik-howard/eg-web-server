@@ -1,2 +1,4 @@
 
-serverPort: 7070
+port:
+  front: 7070
+  back: 7070

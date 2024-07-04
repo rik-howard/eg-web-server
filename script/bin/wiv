@@ -8,6 +8,7 @@ then
     helm    ) $1 version;;
     kubectl ) $1 version --short 2>/dev/null | xargs;;
     minikube) $1 version;;
+    xterm   ) $1 -version;;
     *       ) $1 --version;;
     esac
 else echo "not found"

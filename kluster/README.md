@@ -8,12 +8,26 @@
 
 ### Set-Up
 ```bash
-clear
-source etc/module
 source etc/config
 ```
+```bash
+xt + show_docker
+```
+```bash
+xt + show_kubernetes
+```
+```bash
+start_docker
+```
+```bash
+start_minikube
+```
+```bash
+start_tunnel
+```
 
-### First: Blue Service
+### First Service: Blue
+Blue
 ```bash
 helm install blue src/deployment --values=src/values.yaml --values=src/blue.yaml
 ```
@@ -27,7 +41,8 @@ loader-load-test 7070 hostname 100
 loader-check-log
 ```
 
-### Second: Cyan Service
+### Second Service: Green
+Cyan
 ```bash
 helm install green src/deployment --values=src/values.yaml --values=src/green.yaml
 ```
@@ -40,8 +55,7 @@ loader-load-test 7070 hostname 100
 ```bash
 loader-check-log
 ```
-
-### Third: Green Service
+Green
 ```bash
 helm upgrade wss src/service --values=src/values.yaml --values=src/green.yaml
 ```
@@ -52,7 +66,8 @@ loader-load-test 7070 hostname 100
 loader-check-log
 ```
 
-### Fourth: Cyan Service
+### Third Service: Blue
+Cyan
 ```bash
 helm upgrade blue src/deployment --values=src/values.yaml --values=src/blue.yaml
 ```
@@ -65,8 +80,7 @@ loader-load-test 7070 hostname 100
 ```bash
 loader-check-log
 ```
-
-### Fifth: Blue Service
+Blue
 ```bash
 helm upgrade wss src/service --values=src/values.yaml --values=src/blue.yaml
 ```
@@ -77,6 +91,27 @@ loader-load-test 7070 hostname 100
 loader-check-log
 ```
 
+### Summary
+
+    helm install deployment blue   #
+    helm install service blue      # v0
+    helm install deployment green  #
+    helm upgrade service cyan      # v0 and v1
+    helm upgrade service green     # v1
+    helm upgrade deployment blue   #
+    helm upgrade service cyan      # v1 and v2
+    helm upgrade service blue      # v2
+    helm upgrade deployment green  #
+    ...
+
+Try this later
+```bash
+xt + 'loader-load-test 7070 hostname 500; sleep 30; loader-check-log'
+```
+```bash
+helm upgrade wss src/service --values=src/values.yaml --values=src/cyan.yaml
+```
+
 ### Tear-Down
 ```bash
 helm uninstall wss
@@ -84,12 +119,13 @@ helm uninstall blue
 helm uninstall green
 ```
 ```bash
-monitor_stop
-tunnel_stop
+stop_tunnel
 ```
 ```bash
-minikube_stop
-docker_stop
+stop_minikube
+```
+```bash
+stop_docker
 ```
 
 
@@ -105,7 +141,7 @@ graph TD
         Service[WSS]
         subgraph Deployment [Blue]
             Pod0[Blue0]
-            Pod1[Blue1]
+            Pod1[BlueN]
         end
     end
 ```
@@ -113,8 +149,8 @@ graph TD
 ### Blue Service
 ```mermaid
 graph TD
-    Loader
-    Loader --- WSS
+    User
+    User --- WSS
     subgraph WSK
         WSS
         WSS --- Blue0
@@ -135,8 +171,8 @@ graph TD
 ### Cyan Service
 ```mermaid
 graph TD
-    Loader
-    Loader --- WSS
+    User
+    User --- WSS
     subgraph WSK
         WSS
         WSS --- Blue0
@@ -157,8 +193,8 @@ graph TD
 ### Green Service
 ```mermaid
 graph TD
-    Loader
-    Loader --- WSS
+    User
+    User --- WSS
     subgraph WSK
         WSS
         WSS -.- Blue0

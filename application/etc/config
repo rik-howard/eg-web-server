@@ -3,6 +3,8 @@
 # $ source etc/config
 ##
 
+clear
+
 export JAVA_HOME=$HOME/studio/program/jdk-17.0.2
 export MAVEN_HOME=$HOME/studio/program/apache-maven-3.8.5
 export BASE=$(dirname "$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[*]}")")")")
@@ -17,11 +19,11 @@ $BASE/script/bin:\
 /bin
 
 clear
-echo "Application Tooling
-
-    java    : $(wiv java | head -1)
-    mvn     : $(wiv mvn | head -1)
-    http    : $(wiv http)
-    jq      : $(wiv jq)
-
-"
+echo
+echo "Application Tooling:"
+echo
+echo "    java: $(wiv java | head -1)"
+echo "    mvn : $(wiv mvn | head -1)"
+echo "    http: $(wiv http)"
+echo "    jq  : $(wiv jq)"
+echo
