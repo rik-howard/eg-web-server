@@ -9,33 +9,42 @@
 ### Set Up
 ```bash
 source etc/config
+export H=32 W=142
 ```
 ```bash
-xt + show_docker
+xt + 'show_docker | heat'
 ```
 ```bash
 start_docker
 ```
 ```bash
-cp -pr ../application/target/web-server-application-0.2.0.jar src/tmp
+export JAR_REPO=../application/target
+cp -pr $JAR_REPO/web-server-application-$APPLICATION_VERSION.jar src/tmp
 ```
 ```bash
-docker build src --tag=rik911/web-server-container:0.2.1 --build-arg=VERSION=0.2.0
+docker build src --tag=rik911/web-server-container:$APPLICATION_VERSION --build-arg=VERSION=$APPLICATION_VERSION
 ```
 ```bash
-xt docker run --tty --name=wsc --publish=8008:8080 rik911/web-server-container:0.2.1
+H=16 W=212
+xt docker run --tty --name=wsc\
+ --expose=$CONTAINER_PORT\
+ --publish=$CONTAINER_PORT:$APPLICATION_PORT\
+ --env=COLOUR=$APPLICATION_COLOUR\
+ --env=VERSION=$APPLICATION_VERSION\
+ --env=SERVER_PORT=$APPLICATION_PORT\
+ rik911/web-server-container:$APPLICATION_VERSION
+H=96 W=48
 ```
 
 ### Verify
 ```Bash
-loader-load-test 8008 hostname 100
+loader-get-local $CONTAINER_PORT hostname 4263
 ```
 ```Bash
-loader-check-log
+xt "loader-chug-it $CONTAINER_PORT hostname 100 5"
 ```
 ```Bash
-#docker login --user=rik911
-docker push rik911/web-server-container:0.2.1
+docker push rik911/web-server-container:$APPLICATION_VERSION
 ```
 
 ### Tear Down
@@ -46,7 +55,7 @@ docker container stop wsc
 docker container remove wsc
 ```
 ```bash
-docker image remove rik911/web-server-container:0.2.1
+docker image remove rik911/web-server-container:$APPLICATION_VERSION
 ```
 ```bash
 stop_docker

@@ -17,7 +17,7 @@ class WSControllerUT {
 
     @BeforeEach void setUp () {
         MockitoAnnotations.openMocks (this);
-        subject = new WSController (mockWSService, "green");
+        subject = new WSController (mockWSService, "red");
     }
 
     @Test void shouldReturnEPs () {
@@ -37,7 +37,7 @@ class WSControllerUT {
         // given
         String hostname = "whatever";
         String requestId = "000";
-        String colour = "green";
+        String colour = "red";
         // when
         when (mockWSService.hostname ()).thenReturn (hostname);
         Mono <String> actual = subject.hostnameJsonMono (requestId);

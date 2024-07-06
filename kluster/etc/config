@@ -28,4 +28,38 @@ echo "    jq      : $(wiv jq)"
 echo "    yq      : $(wiv yq)"
 echo
 
+APPLICATION_VERSION=$(ls $BASE/application/target/*.jar | egrep -o [0-9]+.[0-9]+.[0-9]+)
+APPLICATION_PORT=$(cat src/values.yaml | yq -r .port.application)
+APPLICATION_COLOUR=yellow
+CONTAINER_PORT=$(cat src/values.yaml | yq -r .port.container)
+KLUSTER_SERVICE_VERSION=$(cat src/service/Chart.yaml | yq -r .version)
+KLUSTER_DEPLOYMENT_VERSION=$(cat src/deployment/Chart.yaml | yq -r .version)
+KLUSTER_NODE_PORT=$(cat src/values.yaml | yq -r .port.node)
+KLUSTER_REAR_PORT=$(cat src/values.yaml | yq -r .port.rear)
+KLUSTER_TARGET_PORT=$(cat src/values.yaml | yq -r .port.target)
+
+export APPLICATION_VERSION
+export APPLICATION_COLOUR
+export APPLICATION_PORT
+export CONTAINER_PORT
+export KLUSTER_SERVICE_VERSION
+export KLUSTER_DEPLOYMENT_VERSION
+export KLUSTER_NODE_PORT
+export KLUSTER_REAR_PORT
+export KLUSTER_TARGET_PORT
+
+echo
+echo "Kluster Environment:"
+echo
+echo "    APPLICATION_VERSION       : $APPLICATION_VERSION"
+echo "    APPLICATION_PORT          : $APPLICATION_PORT"
+echo "    APPLICATION_COLOUR        : $APPLICATION_COLOUR"
+echo "    CONTAINER_PORT            : $CONTAINER_PORT"
+echo "    KLUSTER_SERVICE_VERSION   : $KLUSTER_SERVICE_VERSION"
+echo "    KLUSTER_DEPLOYMENT_VERSION: $KLUSTER_DEPLOYMENT_VERSION"
+echo "    KLUSTER_NODE_PORT         : $KLUSTER_NODE_PORT"
+echo "    KLUSTER_REAR_PORT         : $KLUSTER_REAR_PORT"
+echo "    KLUSTER_TARGET_PORT       : $KLUSTER_TARGET_PORT"
+echo
+
 source $BASE/script/etc/engine

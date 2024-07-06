@@ -1,0 +1,20 @@
+#!/bin/bash
+##
+# $ loader-chug-it $PORT $PATH $COUNT $SLEEP
+##
+export COLOUR=$(colour)
+loader-load-test $1 $2 $3 "$(date +%H%M%S)" | hit '^ *[^:]+:'
+sleep $4
+check=$(loader-check-log)
+echo "$check" | hit '^ *[^:]+:'
+while test "$(echo "$check" | yq .200)" -lt "$3"
+do
+    sleep $4
+    check=$(loader-check-log)
+    echo "$check" | hit '^ *[^:]+:'
+done
+echo
+read -p'
+DONE
+'
+unset COLOUR

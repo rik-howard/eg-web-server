@@ -14,6 +14,7 @@ EG Web Server is a clustered, contained application.  It utilises Spring Boot, D
 * Helm 3.12
 * HTTPie 3.2
 * JQ 1.6
+* XQ 1.2.3
 * YQ 4.33
 
 

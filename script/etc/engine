@@ -1,6 +1,6 @@
 #!/bin/bash
 ##
-# $ source engine
+# $ source script/etc/engine
 ##
 
 docker_status () { systemctl is-active docker-desktop.service --user; }

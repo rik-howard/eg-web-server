@@ -9,32 +9,34 @@
 ### Set Up
 ```Bash
 source etc/config
+export H=16 W=212
 ```
 ```Bash
-mvn clean verify
+mvn clean verify -Dspring.profiles.active=testing
 ```
 ```Bash
-xt java -jar target/web-server-application-0.2.0.jar --colour=magenta
+xt java -jar target/web-server-application-$APPLICATION_VERSION.jar --server.port=$APPLICATION_PORT --colour=$APPLICATION_COLOUR
 ```
 
 ### Verify
 ```Bash
-http GET localhost:8080
-http GET localhost:8080/hostname Request-Id:4711
+http GET localhost:$APPLICATION_PORT
+http GET localhost:$APPLICATION_PORT/hostname Request-Id:4711
 ```
 ```Bash
-loader-get-local 8080 hostname 3435
+loader-get-local $APPLICATION_PORT hostname 3345
 ```
 ```Bash
-loader-load-test 8080 hostname
-```
-```Bash
-loader-check-log
+H=32 W=48
+xt "loader-chug-it $APPLICATION_PORT hostname 10 3"
 ```
 
 ### Tear Down
 ```Bash
-psef java..jar.target.web.server.application.0.2.0.jar --kill
+psef loader.chug.it --kill
+```
+```Bash
+psef web.server.application --kill
 ```
 
 ## What
@@ -42,7 +44,7 @@ psef java..jar.target.web.server.application.0.2.0.jar --kill
 graph TD
     User --- AP
     subgraph Application [Application: WSA]
-        AP[Application Port: 8080]
+        AP[Application Port: $APPLICATION_PORT]
     end
 ```
 

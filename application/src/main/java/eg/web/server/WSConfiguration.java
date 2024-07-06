@@ -9,9 +9,8 @@ public class WSConfiguration {
 
     @Value ("${colour}") private String colour;
 
-    @Bean (name = "colour") public String colour () {
+    @Bean ("colour") public String colour () {
         return colour;
     }
-
 
 }

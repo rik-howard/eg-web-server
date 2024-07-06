@@ -1,0 +1,21 @@
+#!/bin/bash
+##
+# $ clr
+##
+
+# case $(($RANDOM % 4)) in
+#     0) mod=d;;
+#     1) mod=m;;
+#     2) mod=n;;
+#     3) mod=l;;
+# esac
+mod=l
+
+case $(($RANDOM % 6)) in
+    0) echo ${mod}r;;
+    1) echo ${mod}y;;
+    2) echo ${mod}g;;
+    3) echo ${mod}c;;
+    4) echo ${mod}b;;
+    5) echo ${mod}m;;
+esac

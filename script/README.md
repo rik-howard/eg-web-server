@@ -8,7 +8,7 @@
 Provides some unrelated scripts as some presentation aids.
 ```bash
 clear
-export PATH=.:bin:/bin
+export PATH=.:bin:/usr/local/bin:/usr/bin:/bin
 ```
 
 ### `how`
@@ -25,11 +25,11 @@ Applies a function to a stream.
 clear
 how map
 echo -e '..\n.' | map readlink -f
-echo -e '..\n.' | map ls -l
+echo -e '..\n.' | map ls -a -l
 ```
 
 ### `psef`
-Returns the process table descriptions of the processes whose descriptions match the given regex or all descriptions, if no regex is given.  The pid or commands can be accessed or the processes can be killed.
+Returns the process table entries of the processes whose entries match the given regex or of all entries, if no regex is given.  The pids or commands can be accessed or the processes can be killed.
 ```bash
 clear
 how psef
@@ -42,9 +42,9 @@ Returns the version of the given program, if the program can be found, or a not-
 ```bash
 clear
 how wiv
-wiv xterm
-wiv docker
 wiv unknown
+wiv docker
+wiv xterm
 ```
 
 ### `xt`
@@ -60,19 +60,17 @@ psef xterm.+bash
 ```bash
 psef xterm.+bash --kill
 ```
-Optionally, the command can be preceded by a +-sign, which runs the command in a while-loop, advancing as the user presses the enter key.
+Optionally, the command can be preceded by a +-sign, which runs the command in a while-loop, advancing as the user presses the enter key, optionally entering a regular expression for high lighting.
 ```bash
 export i=11
-xt + 'echo $i; i=$((i+1))'
+xt + 'hot $i; i=$((i+1))'
 ```
 ```bash
-psef xterm.+echo..i..i....i.1.. --cmd
+psef xterm --cmd | egrep -o export.+
 ```
 ```bash
-psef xterm.+echo..i..i....i.1.. --kill
+psef xterm --kill
 ```
-
-*2024-07-01*
 
 
 ## `etc/engine`
@@ -80,16 +78,17 @@ Provides start, stop and status commands for Docker and Minikube.
 ```bash
 clear
 export PATH=.:bin:/usr/local/bin:/usr/bin:/bin
+export H=32 W=142
 source etc/engine
 ```
 
 ### Showing
 ```bash
-xt + show_docker
-xt + show_kubernetes
+xt + 'show_docker | heat'
+xt + 'show_kubernetes | heat'
 ```
 
-### Starting
+### Setting Up
 ```bash
 start_docker
 ```
@@ -97,18 +96,35 @@ start_docker
 start_minikube
 ```
 ```bash
+H=8 W=142
 start_tunnel
 ```
 
-### Stopping
+### Tearing Down
+Tunnel
 ```bash
 stop_tunnel
 ```
+Minikube
 ```bash
-stop_minikube
+helm uninstall wss
 ```
-
-### Tearing Down
+```bash
+helm uninstall blue
+```
+```bash
+helm uninstall green
+```
+```bash
+docker container stop wsc
+```
+```bash
+stop_minikube  # docker container stop minikube
+```
+Docker
+```bash
+docker container remove wsc
+```
 ```bash
 docker container remove minikube
 ```
@@ -117,6 +133,9 @@ docker network remove minikube
 ```
 ```bash
 docker volume remove minikube
+```
+```bash
+docker image list | egrep web.server.container | xargs | cut -d' ' -f1-2 | tr ' ' ':' | map docker image remove
 ```
 ```bash
 docker image list | egrep minikube | xargs | cut -d' ' -f1-2 | tr ' ' ':' | map docker image remove
@@ -130,3 +149,5 @@ docker system prune --force
 ```bash
 stop_docker
 ```
+
+*2024-07-01*

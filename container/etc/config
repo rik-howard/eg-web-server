@@ -1,6 +1,6 @@
 #!/bin/bash
 ##
-# $ source etc/config
+# $ source container/etc/config
 ##
 
 clear
@@ -23,6 +23,26 @@ echo
 echo "    docker: $(wiv docker)"
 echo "    http  : $(wiv http)"
 echo "    jq    : $(wiv jq)"
+echo "    yq    : $(wiv yq)"
+echo
+
+APPLICATION_VERSION=$(ls $BASE/application/target/*.jar | egrep -o [0-9]+.[0-9]+.[0-9]+)
+APPLICATION_PORT=$(cat src/Dockerfile | egrep ENV.SERVER.PORT | cut -d= -f2)
+APPLICATION_COLOUR=$(cat src/Dockerfile | egrep ENV.COLOUR | cut -d= -f2)
+CONTAINER_PORT=$(cat src/Dockerfile | egrep EXPOSE | cut -d' ' -f2)
+
+export APPLICATION_VERSION
+export APPLICATION_PORT
+export APPLICATION_COLOUR
+export CONTAINER_PORT
+
+echo
+echo "Container Environment:"
+echo
+echo "    APPLICATION_VERSION: $APPLICATION_VERSION"
+echo "    APPLICATION_PORT   : $APPLICATION_PORT"
+echo "    APPLICATION_COLOUR : $APPLICATION_COLOUR"
+echo "    CONTAINER_PORT     : $CONTAINER_PORT"
 echo
 
 source $BASE/script/etc/engine

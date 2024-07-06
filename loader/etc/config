@@ -1,6 +1,6 @@
 #!/bin/bash
 ##
-# $ source etc/config
+# $ source loader/etc/config
 ##
 
 clear
