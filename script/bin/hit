@@ -1,0 +1,16 @@
+#!/bin/bash
+##
+# | hit [<regex>]
+##
+pgm=$(readlink -f $0)
+bin=$(dirname $pgm)
+etc=${bin/bin/etc}
+source $etc/colour
+export COLOUR=${COLOUR:-$(colour)}
+
+if test -n "$1"
+then sed -re "s/($1)/$($COLOUR "\1")/g"
+else cat
+fi
+
+unset COLOUR

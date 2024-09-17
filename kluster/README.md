@@ -9,12 +9,14 @@
 ### Set-Up
 ```bash
 source etc/config
+export H=32 W=142
+# update kluster versions based on application version
 ```
 ```bash
-xt + show_docker
+xt + 'show_docker | heat'
 ```
 ```bash
-xt + show_kubernetes
+xt + 'show_kubernetes | heat'
 ```
 ```bash
 start_docker
@@ -23,7 +25,13 @@ start_docker
 start_minikube
 ```
 ```bash
+H=8 W=142
 start_tunnel
+H=96 W=48
+```
+Run this at the end of each paragraph, below
+```bash
+xt "loader-chug-it $KLUSTER_NODE_PORT hostname 100 5"
 ```
 
 ### First Service: Blue
@@ -34,12 +42,6 @@ helm install blue src/deployment --values=src/values.yaml --values=src/blue.yaml
 ```bash
 helm install wss src/service --values=src/values.yaml --values=src/blue.yaml
 ```
-```bash
-loader-load-test 7070 hostname 100
-```
-```bash
-loader-check-log
-```
 
 ### Second Service: Green
 Cyan
@@ -49,21 +51,9 @@ helm install green src/deployment --values=src/values.yaml --values=src/green.ya
 ```bash
 helm upgrade wss src/service --values=src/values.yaml --values=src/cyan.yaml
 ```
-```bash
-loader-load-test 7070 hostname 100
-```
-```bash
-loader-check-log
-```
 Green
 ```bash
 helm upgrade wss src/service --values=src/values.yaml --values=src/green.yaml
-```
-```bash
-loader-load-test 7070 hostname 100
-```
-```bash
-loader-check-log
 ```
 
 ### Third Service: Blue
@@ -74,21 +64,9 @@ helm upgrade blue src/deployment --values=src/values.yaml --values=src/blue.yaml
 ```bash
 helm upgrade wss src/service --values=src/values.yaml --values=src/cyan.yaml
 ```
-```bash
-loader-load-test 7070 hostname 100
-```
-```bash
-loader-check-log
-```
 Blue
 ```bash
 helm upgrade wss src/service --values=src/values.yaml --values=src/blue.yaml
-```
-```bash
-loader-load-test 7070 hostname 100
-```
-```bash
-loader-check-log
 ```
 
 ### Summary
@@ -106,7 +84,7 @@ loader-check-log
 
 Try this later
 ```bash
-xt + 'loader-load-test 7070 hostname 500; sleep 30; loader-check-log'
+xt + 'loader-load-test $KLUSTER_NODE_PORT hostname 500; sleep 30; loader-check-log'
 ```
 ```bash
 helm upgrade wss src/service --values=src/values.yaml --values=src/cyan.yaml

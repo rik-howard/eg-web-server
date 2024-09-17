@@ -1,0 +1,295 @@
+#!/bin/bash
+##
+# $ source script/etc/colour
+##
+
+render () { echo -en "\x1b[38;2;$1m${@:2}\x1b[0m"; }; export -f render
+
+colour_000 () { render       "0;0;0" "$@"; }; export -f colour_000
+colour_001 () { render     "0;0;127" "$@"; }; export -f colour_001
+colour_002 () { render     "0;0;255" "$@"; }; export -f colour_002
+colour_010 () { render     "0;127;0" "$@"; }; export -f colour_010
+colour_011 () { render   "0;127;127" "$@"; }; export -f colour_011
+colour_012 () { render   "0;127;255" "$@"; }; export -f colour_012
+colour_020 () { render     "0;255;0" "$@"; }; export -f colour_020
+colour_021 () { render   "0;255;127" "$@"; }; export -f colour_021
+colour_022 () { render   "0;255;255" "$@"; }; export -f colour_022
+colour_100 () { render     "127;0;0" "$@"; }; export -f colour_100
+colour_101 () { render   "127;0;127" "$@"; }; export -f colour_101
+colour_102 () { render   "127;0;255" "$@"; }; export -f colour_102
+colour_110 () { render   "127;127;0" "$@"; }; export -f colour_110
+colour_111 () { render "127;127;127" "$@"; }; export -f colour_111
+colour_112 () { render "127;127;255" "$@"; }; export -f colour_112
+colour_120 () { render   "127;255;0" "$@"; }; export -f colour_120
+colour_121 () { render "127;255;127" "$@"; }; export -f colour_121
+colour_122 () { render "127;255;255" "$@"; }; export -f colour_122
+colour_200 () { render     "255;0;0" "$@"; }; export -f colour_200
+colour_201 () { render   "255;0;127" "$@"; }; export -f colour_201
+colour_202 () { render   "255;0;255" "$@"; }; export -f colour_202
+colour_210 () { render   "255;127;0" "$@"; }; export -f colour_210
+colour_211 () { render "255;127;127" "$@"; }; export -f colour_211
+colour_212 () { render "255;127;255" "$@"; }; export -f colour_212
+colour_220 () { render   "255;255;0" "$@"; }; export -f colour_220
+colour_221 () { render "255;255;127" "$@"; }; export -f colour_221
+colour_222 () { render "255;255;255" "$@"; }; export -f colour_222
+
+black         () { colour_000 "$@"; }; export -f black
+dark_blue     () { colour_001 "$@"; }; export -f dark_blue
+med_blue      () { colour_002 "$@"; }; export -f med_blue
+dark_green    () { colour_010 "$@"; }; export -f dark_green
+dark_cyan     () { colour_011 "$@"; }; export -f dark_cyan
+neon_blue     () { colour_012 "$@"; }; export -f neon_blue
+med_green     () { colour_020 "$@"; }; export -f med_green
+neon_cyan     () { colour_021 "$@"; }; export -f neon_cyan
+med_cyan      () { colour_022 "$@"; }; export -f med_cyan
+dark_red      () { colour_100 "$@"; }; export -f dark_red
+dark_magenta  () { colour_101 "$@"; }; export -f dark_magenta
+neon_magenta  () { colour_102 "$@"; }; export -f neon_magenta
+dark_yellow   () { colour_110 "$@"; }; export -f dark_yellow
+grey          () { colour_111 "$@"; }; export -f grey
+light_blue    () { colour_112 "$@"; }; export -f light_blue
+neon_green    () { colour_120 "$@"; }; export -f neon_green
+light_green   () { colour_121 "$@"; }; export -f light_green
+light_cyan    () { colour_122 "$@"; }; export -f light_cyan
+med_red       () { colour_200 "$@"; }; export -f med_red
+neon_red      () { colour_201 "$@"; }; export -f neon_red
+med_magenta   () { colour_202 "$@"; }; export -f med_magenta
+neon_yellow   () { colour_210 "$@"; }; export -f neon_yellow
+light_red     () { colour_211 "$@"; }; export -f light_red
+light_magenta () { colour_212 "$@"; }; export -f light_magenta
+med_yellow    () { colour_220 "$@"; }; export -f med_yellow
+light_yellow  () { colour_221 "$@"; }; export -f light_yellow
+white         () { colour_222 "$@"; }; export -f white
+
+black    () { colour_000 "$@"; }; export -f black
+dblue    () { colour_001 "$@"; }; export -f dblue
+mblue    () { colour_002 "$@"; }; export -f mblue
+dgreen   () { colour_010 "$@"; }; export -f dgreen
+dcyan    () { colour_011 "$@"; }; export -f dcyan
+nblue    () { colour_012 "$@"; }; export -f nblue
+mgreen   () { colour_020 "$@"; }; export -f mgreen
+ncyan    () { colour_021 "$@"; }; export -f ncyan
+mcyan    () { colour_022 "$@"; }; export -f mcyan
+dred     () { colour_100 "$@"; }; export -f dred
+dmagenta () { colour_101 "$@"; }; export -f dmagenta
+nmagenta () { colour_102 "$@"; }; export -f nmagenta
+dyellow  () { colour_110 "$@"; }; export -f dyellow
+grey     () { colour_111 "$@"; }; export -f grey
+lblue    () { colour_112 "$@"; }; export -f lblue
+ngreen   () { colour_120 "$@"; }; export -f ngreen
+lgreen   () { colour_121 "$@"; }; export -f lgreen
+lcyan    () { colour_122 "$@"; }; export -f lcyan
+mred     () { colour_200 "$@"; }; export -f mred
+nred     () { colour_201 "$@"; }; export -f nred
+mmagenta () { colour_202 "$@"; }; export -f mmagenta
+nyellow  () { colour_210 "$@"; }; export -f nyellow
+lred     () { colour_211 "$@"; }; export -f lred
+lmagenta () { colour_212 "$@"; }; export -f lmagenta
+myellow  () { colour_220 "$@"; }; export -f myellow
+lyellow  () { colour_221 "$@"; }; export -f lyellow
+white    () { colour_222 "$@"; }; export -f white
+
+blue     () { colour_002 "$@"; }; export -f blue
+green    () { colour_020 "$@"; }; export -f green
+cyan     () { colour_022 "$@"; }; export -f cyan
+red      () { colour_200 "$@"; }; export -f red
+magenta  () { colour_202 "$@"; }; export -f magenta
+yellow   () { colour_220 "$@"; }; export -f yellow
+
+k  () { colour_000 "$@"; }; export -f k
+db () { colour_001 "$@"; }; export -f db
+mb () { colour_002 "$@"; }; export -f mb
+dg () { colour_010 "$@"; }; export -f dg
+dc () { colour_011 "$@"; }; export -f dc
+nb () { colour_012 "$@"; }; export -f nb
+mg () { colour_020 "$@"; }; export -f mg
+nc () { colour_021 "$@"; }; export -f nc
+mc () { colour_022 "$@"; }; export -f mc
+dr () { colour_100 "$@"; }; export -f dr
+dm () { colour_101 "$@"; }; export -f dm
+nm () { colour_102 "$@"; }; export -f nm
+dy () { colour_110 "$@"; }; export -f dy
+e  () { colour_111 "$@"; }; export -f e
+lb () { colour_112 "$@"; }; export -f lb
+ng () { colour_120 "$@"; }; export -f ng
+lg () { colour_121 "$@"; }; export -f lg
+lc () { colour_122 "$@"; }; export -f lc
+mr () { colour_200 "$@"; }; export -f mr
+nr () { colour_201 "$@"; }; export -f nr
+mm () { colour_202 "$@"; }; export -f mm
+ny () { colour_210 "$@"; }; export -f ny
+lr () { colour_211 "$@"; }; export -f lr
+lm () { colour_212 "$@"; }; export -f lm
+my () { colour_220 "$@"; }; export -f my
+ly () { colour_221 "$@"; }; export -f ly
+w  () { colour_222 "$@"; }; export -f w
+
+b0 () { render "0;0;127" "$*"; }; export -f b0
+b1 () { render "0;0;145" "$*"; }; export -f b1
+b2 () { render "0;0;164" "$*"; }; export -f b2
+b3 () { render "0;0;182" "$*"; }; export -f b3
+b4 () { render "0;0;200" "$*"; }; export -f b4
+b5 () { render "0;0;218" "$*"; }; export -f b5
+b6 () { render "0;0;237" "$*"; }; export -f b6
+b7 () { render "0;0;255" "$*"; }; export -f b7
+g0 () { render "0;127;0" "$*"; }; export -f g0
+g1 () { render "0;145;0" "$*"; }; export -f g1
+g2 () { render "0;164;0" "$*"; }; export -f g2
+g3 () { render "0;182;0" "$*"; }; export -f g3
+g4 () { render "0;200;0" "$*"; }; export -f g4
+g5 () { render "0;218;0" "$*"; }; export -f g5
+g6 () { render "0;237;0" "$*"; }; export -f g6
+g7 () { render "0;255;0" "$*"; }; export -f g7
+c0 () { render "0;127;127" "$*"; }; export -f c0
+c1 () { render "0;145;145" "$*"; }; export -f c1
+c2 () { render "0;164;164" "$*"; }; export -f c2
+c3 () { render "0;182;182" "$*"; }; export -f c3
+c4 () { render "0;200;200" "$*"; }; export -f c4
+c5 () { render "0;218;218" "$*"; }; export -f c5
+c6 () { render "0;237;237" "$*"; }; export -f c6
+c7 () { render "0;255;255" "$*"; }; export -f c7
+r0 () { render "127;0;0" "$*"; }; export -f r0
+r1 () { render "145;0;0" "$*"; }; export -f r1
+r2 () { render "164;0;0" "$*"; }; export -f r2
+r3 () { render "182;0;0" "$*"; }; export -f r3
+r4 () { render "200;0;0" "$*"; }; export -f r4
+r5 () { render "218;0;0" "$*"; }; export -f r5
+r6 () { render "237;0;0" "$*"; }; export -f r6
+r7 () { render "255;0;0" "$*"; }; export -f r7
+m0 () { render "127;0;127" "$*"; }; export -f m0
+m1 () { render "145;0;145" "$*"; }; export -f m1
+m2 () { render "164;0;164" "$*"; }; export -f m2
+m3 () { render "182;0;182" "$*"; }; export -f m3
+m4 () { render "200;0;200" "$*"; }; export -f m4
+m5 () { render "218;0;218" "$*"; }; export -f m5
+m6 () { render "237;0;237" "$*"; }; export -f m6
+m7 () { render "255;0;255" "$*"; }; export -f m7
+y0 () { render "127;127;0" "$*"; }; export -f y0
+y1 () { render "145;145;0" "$*"; }; export -f y1
+y2 () { render "164;164;0" "$*"; }; export -f y2
+y3 () { render "182;182;0" "$*"; }; export -f y3
+y4 () { render "200;200;0" "$*"; }; export -f y4
+y5 () { render "218;218;0" "$*"; }; export -f y5
+y6 () { render "237;237;0" "$*"; }; export -f y6
+y7 () { render "255;255;0" "$*"; }; export -f y7
+e0 () { render "0;0;0" "$*"; }; export -f e0
+e1 () { render "17;17;17" "$*"; }; export -f e1
+e2 () { render "36;36;36" "$*"; }; export -f e2
+e3 () { render "54;54;54" "$*"; }; export -f e3
+e4 () { render "72;72;72" "$*"; }; export -f e4
+e5 () { render "90;90;90" "$*"; }; export -f e5
+e6 () { render "109;109;109" "$*"; }; export -f e6
+e7 () { render "127;127;127" "$*"; }; export -f e7
+w0 () { render "127;127;127" "$*"; }; export -f w0
+w1 () { render "145;145;145" "$*"; }; export -f w1
+w2 () { render "164;164;164" "$*"; }; export -f w2
+w3 () { render "182;182;182" "$*"; }; export -f w3
+w4 () { render "200;200;200" "$*"; }; export -f w4
+w5 () { render "218;218;218" "$*"; }; export -f w5
+w6 () { render "237;237;237" "$*"; }; export -f w6
+w7 () { render "255;255;255" "$*"; }; export -f w7
+
+show_colours () {
+    ordinals=$(cat ${BASH_SOURCE[0]} | egrep '^colour_[0-9]' | cut -d' ' -f1 | cut -d_ -f2)
+    for ordinal in $ordinals
+    do
+        string=$(printf '%-8s %s' $(colour_nick $ordinal) $(colour_name $ordinal))
+        $(colour_nick $ordinal) "$string\n"
+    done
+}; export -f show_colours
+
+colour_name () { ord=$1
+    case "$ord" in
+       000) echo black        ;;  #
+       001) echo dark_blue    ;;  # db
+       002) echo med_blue     ;;  # mb
+       010) echo dark_green   ;;  # dg
+       011) echo dark_cyan    ;;  # dc
+       012) echo neon_blue    ;;  # nb, neon
+       020) echo med_green    ;;  # mg
+       021) echo neon_cyan    ;;  # nc, teal
+       022) echo med_cyan     ;;  # mc
+       100) echo dark_red     ;;  # dr
+       101) echo dark_magenta ;;  # dm
+       102) echo neon_magenta ;;  # nm, purple
+       110) echo dark_yellow  ;;  # dy
+       111) echo grey         ;;  #
+       112) echo light_blue   ;;  # lb
+       120) echo neon_green   ;;  # ng, ?
+       121) echo light_green  ;;  # lg
+       122) echo light_cyan   ;;  # lc
+       200) echo med_red      ;;  # mr
+       201) echo neon_red     ;;  # nr, salmon
+       202) echo med_magenta  ;;  # mm
+       210) echo neon_yellow  ;;  # ny, orange
+       211) echo light_red    ;;  # lr, pink
+       212) echo light_magenta;;  # lm
+       220) echo med_yellow   ;;  # my
+       221) echo light_yellow ;;  # ly
+       222) echo white        ;;  #
+    esac
+}; export -f colour_name
+
+colour_nick () { ord=$1
+    case "$ord" in
+       000) echo black   ;;  #
+       001) echo dblue   ;;  #
+       002) echo mblue   ;;  #
+       010) echo dgreen  ;;  #
+       011) echo dcyan   ;;  #
+       012) echo nblue   ;;  # , neon
+       020) echo mgreen  ;;  #
+       021) echo ncyan   ;;  # , teal
+       022) echo mcyan   ;;  #
+       100) echo dred    ;;  #
+       101) echo dmagenta;;  #
+       102) echo nmagenta;;  # , purple
+       110) echo dyellow ;;  #
+       111) echo grey    ;;  #
+       112) echo lblue   ;;  #
+       120) echo ngreen  ;;  # , ?
+       121) echo lgreen  ;;  #
+       122) echo lcyan   ;;  #
+       200) echo mred    ;;  #
+       201) echo nred    ;;  # , salmon
+       202) echo mmagenta;;  #
+       210) echo nyellow ;;  # , orange
+       211) echo lred    ;;  # , pink
+       212) echo lmagenta;;  #
+       220) echo myellow ;;  #
+       221) echo lyellow ;;  #
+       222) echo white   ;;  #
+    esac
+}; export -f colour_nick
+
+colour_ord () { name=$1
+    case "$name" in
+       black        ) echo 000;;
+       dark_blue    ) echo 001;;
+       med_blue     ) echo 002;;
+       dark_green   ) echo 010;;
+       dark_cyan    ) echo 011;;
+       neon_blue    ) echo 012;;
+       med_green    ) echo 020;;
+       neon_cyan    ) echo 021;;
+       med_cyan     ) echo 022;;
+       dark_red     ) echo 100;;
+       dark_magenta ) echo 101;;
+       neon_magenta ) echo 102;;
+       dark_yellow  ) echo 110;;
+       grey         ) echo 111;;
+       light_blue   ) echo 112;;
+       neon_green   ) echo 120;;
+       light_green  ) echo 121;;
+       light_cyan   ) echo 122;;
+       med_red      ) echo 200;;
+       neon_red     ) echo 201;;
+       med_magenta  ) echo 202;;
+       neon_yellow  ) echo 210;;
+       light_red    ) echo 211;;
+       light_magenta) echo 212;;
+       med_yellow   ) echo 220;;
+       light_yellow ) echo 221;;
+       white        ) echo 222;;
+    esac
+}; export -f colour_ord

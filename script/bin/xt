@@ -2,17 +2,34 @@
 ##
 # $ xt <command> ...
 ##
+#echo [$regex] >&2;
+hit_regex () { if test "$regex" == ""; then echo '^ *[A-Z][^:]*:'; else echo "$regex"; fi; }; export -f hit_regex
+hot () { echo "$1" | hit "$(hit_regex)"; }; export -f hot
+heat () { hit "$(hit_regex)"; }; export -f heat
 W=${W:-212}
 H=${H:-16}
-
 case "$1" in
     +)
         xterm -geometry ${W}x${H} -e "
+              export COLOUR=\$(colour);
               while true;
               do
                   clear;
                   ${*:2};
-                  read;
+                  read regex;
+              done;
+              unset COLOUR
+          " &
+          sleep 1
+    ;;
+    x)
+        xterm -geometry ${W}x${H} -e "
+              while true;
+              do
+                  clear;
+                  echo ${W}x${H};
+                  echo \$regex;
+                  read regex
               done
           " &
           sleep 1

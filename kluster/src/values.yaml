@@ -2,3 +2,10 @@
 port:
   front: 7070
   back: 7070
+  node: 7777
+  rear: 7777
+  target: 7777
+  container: 7777
+  application: 7777
+image:
+  name: rik911/web-server-container:0.4.1

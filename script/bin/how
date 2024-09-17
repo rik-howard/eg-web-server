@@ -23,4 +23,4 @@ script=$(script $1)
 end=$(end $script)
 gin=$(gin)
 
-sed -n -e "${gin},${end}p" -e "${end}q" $script
+sed -n -e "${gin},${end}p" -e "${end}q" $script #| hit "$(basename "$1")"

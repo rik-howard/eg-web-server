@@ -18,11 +18,11 @@ spec:
     spec:
       containers:
         - name: wsc
-          image: rik911/web-server-container:0.2.1
-          args:
-            - --colour={{.Values.serverColour}}
+          image: {{.Values.image.name}}
           env:
             - name: SERVER_PORT
-              value: "{{.Values.port.back}}"
+              value: "{{.Values.port.application}}"
+            - name: COLOUR
+              value: {{.Values.serverColour}}
           ports:
-            - containerPort: {{.Values.port.back}}
+            - containerPort: {{.Values.port.container}}

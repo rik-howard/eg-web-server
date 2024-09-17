@@ -1,6 +1,6 @@
 #!/bin/bash
 ##
-# $ source etc/config
+# $ source application/etc/config
 ##
 
 clear
@@ -26,4 +26,21 @@ echo "    java: $(wiv java | head -1)"
 echo "    mvn : $(wiv mvn | head -1)"
 echo "    http: $(wiv http)"
 echo "    jq  : $(wiv jq)"
+echo "    xq  : $(wiv xq)"
+echo "    yq  : $(wiv yq)"
+
+APPLICATION_VERSION=$(cat pom.xml | xq -x /project/version)
+APPLICATION_PORT=$(cat src/main/resources/application.yaml | yq -r .server.port)
+APPLICATION_COLOUR=$(cat src/main/resources/application.yaml | yq -r .colour)
+
+export APPLICATION_VERSION
+export APPLICATION_PORT
+export APPLICATION_COLOUR
+
+echo
+echo "Application Environment:"
+echo
+echo "    APPLICATION_VERSION       : $APPLICATION_VERSION"
+echo "    APPLICATION_PORT          : $APPLICATION_PORT"
+echo "    APPLICATION_COLOUR        : $APPLICATION_COLOUR"
 echo

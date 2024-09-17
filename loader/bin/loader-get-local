@@ -6,6 +6,7 @@ mkdir -p tmp
 PORT=${1:-80}
 PINT=${2:-/}
 REQUEST_ID=${3:-317}
+#echo http GET "localhost:$PORT/$PINT" "Request-Id:$REQUEST_ID" --print=hb
 RESPONSE=$(http GET "localhost:$PORT/$PINT" "Request-Id:$REQUEST_ID" --print=hb)
 RESPONSE_BODY="$(echo "$RESPONSE" | egrep -A4 '{')"
 HTTP_CODE=$(echo "$RESPONSE" | egrep HTTP | cut -d' ' -f2)
